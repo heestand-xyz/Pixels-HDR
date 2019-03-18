@@ -13,7 +13,49 @@
 		74DE7253223FDFC2005B43F1 /* Pixels_HDR.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 74DE7251223FDFC2005B43F1 /* Pixels_HDR.xcdatamodeld */; };
 		74DE7255223FDFC4005B43F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74DE7254223FDFC4005B43F1 /* Assets.xcassets */; };
 		74DE7258223FDFC4005B43F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74DE7256223FDFC4005B43F1 /* LaunchScreen.storyboard */; };
+		74DE7269223FDFFF005B43F1 /* Pixels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74DE7266223FDFF6005B43F1 /* Pixels.framework */; };
+		74DE726A223FDFFF005B43F1 /* Pixels.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74DE7266223FDFF6005B43F1 /* Pixels.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		74DE7270223FE00A005B43F1 /* PixelsShaders.metallib in Frameworks */ = {isa = PBXBuildFile; fileRef = 74DE726F223FE00A005B43F1 /* PixelsShaders.metallib */; };
+		74DE7271223FE00E005B43F1 /* PixelsShaders.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 74DE726F223FE00A005B43F1 /* PixelsShaders.metallib */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		74DE7265223FDFF6005B43F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74DE725F223FDFF5005B43F1 /* Pixels.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 74BC39D721011E3A004E9AA0;
+			remoteInfo = Pixels;
+		};
+		74DE7267223FDFF6005B43F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74DE725F223FDFF5005B43F1 /* Pixels.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3AF28BCC219312900079FC7A;
+			remoteInfo = "Pixels-macOS";
+		};
+		74DE726B223FDFFF005B43F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74DE725F223FDFF5005B43F1 /* Pixels.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 74BC39D621011E3A004E9AA0;
+			remoteInfo = Pixels;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		74DE726D223FDFFF005B43F1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				74DE726A223FDFFF005B43F1 /* Pixels.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		74DE7247223FDFC2005B43F1 /* Pixels HDR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pixels HDR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,6 +66,8 @@
 		74DE7254223FDFC4005B43F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74DE7257223FDFC4005B43F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74DE7259223FDFC4005B43F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		74DE725F223FDFF5005B43F1 /* Pixels.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pixels.xcodeproj; path = ../../pixels/Pixels.xcodeproj; sourceTree = "<group>"; };
+		74DE726F223FE00A005B43F1 /* PixelsShaders.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; path = PixelsShaders.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74DE7269223FDFFF005B43F1 /* Pixels.framework in Frameworks */,
+				74DE7270223FE00A005B43F1 /* PixelsShaders.metallib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,8 +86,11 @@
 		74DE723E223FDFC2005B43F1 = {
 			isa = PBXGroup;
 			children = (
-				74DE7249223FDFC2005B43F1 /* Pixels HDR */,
+				74DE7249223FDFC2005B43F1 /* Source */,
+				74DE7272223FE01F005B43F1 /* Resources */,
 				74DE7248223FDFC2005B43F1 /* Products */,
+				74DE726E223FE00A005B43F1 /* Frameworks */,
+				74DE725F223FDFF5005B43F1 /* Pixels.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -53,18 +102,42 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		74DE7249223FDFC2005B43F1 /* Pixels HDR */ = {
+		74DE7249223FDFC2005B43F1 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				74DE724A223FDFC2005B43F1 /* AppDelegate.swift */,
 				74DE724C223FDFC2005B43F1 /* ViewController.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		74DE7260223FDFF5005B43F1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				74DE7266223FDFF6005B43F1 /* Pixels.framework */,
+				74DE7268223FDFF6005B43F1 /* Pixels_macOS.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		74DE726E223FE00A005B43F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				74DE726F223FE00A005B43F1 /* PixelsShaders.metallib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		74DE7272223FE01F005B43F1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				74DE724E223FDFC2005B43F1 /* Main.storyboard */,
 				74DE7254223FDFC4005B43F1 /* Assets.xcassets */,
 				74DE7256223FDFC4005B43F1 /* LaunchScreen.storyboard */,
 				74DE7259223FDFC4005B43F1 /* Info.plist */,
 				74DE7251223FDFC2005B43F1 /* Pixels_HDR.xcdatamodeld */,
 			);
-			path = "Pixels HDR";
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,10 +150,12 @@
 				74DE7243223FDFC2005B43F1 /* Sources */,
 				74DE7244223FDFC2005B43F1 /* Frameworks */,
 				74DE7245223FDFC2005B43F1 /* Resources */,
+				74DE726D223FDFFF005B43F1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				74DE726C223FDFFF005B43F1 /* PBXTargetDependency */,
 			);
 			name = "Pixels HDR";
 			productName = "Pixels HDR";
@@ -113,6 +188,12 @@
 			mainGroup = 74DE723E223FDFC2005B43F1;
 			productRefGroup = 74DE7248223FDFC2005B43F1 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 74DE7260223FDFF5005B43F1 /* Products */;
+					ProjectRef = 74DE725F223FDFF5005B43F1 /* Pixels.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				74DE7246223FDFC2005B43F1 /* Pixels HDR */,
@@ -120,11 +201,29 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		74DE7266223FDFF6005B43F1 /* Pixels.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pixels.framework;
+			remoteRef = 74DE7265223FDFF6005B43F1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		74DE7268223FDFF6005B43F1 /* Pixels_macOS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pixels_macOS.framework;
+			remoteRef = 74DE7267223FDFF6005B43F1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		74DE7245223FDFC2005B43F1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74DE7271223FE00E005B43F1 /* PixelsShaders.metallib in Resources */,
 				74DE7258223FDFC4005B43F1 /* LaunchScreen.storyboard in Resources */,
 				74DE7255223FDFC4005B43F1 /* Assets.xcassets in Resources */,
 				74DE7250223FDFC2005B43F1 /* Main.storyboard in Resources */,
@@ -145,6 +244,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		74DE726C223FDFFF005B43F1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Pixels;
+			targetProxy = 74DE726B223FDFFF005B43F1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		74DE724E223FDFC2005B43F1 /* Main.storyboard */ = {
@@ -285,10 +392,11 @@
 		74DE725D223FDFC4005B43F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2QHTY6FMW2;
-				INFOPLIST_FILE = "Pixels HDR/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -303,10 +411,11 @@
 		74DE725E223FDFC4005B43F1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2QHTY6FMW2;
-				INFOPLIST_FILE = "Pixels HDR/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
