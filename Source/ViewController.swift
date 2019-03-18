@@ -15,10 +15,10 @@ class ViewController: UIViewController {
     var final: PIX!
     
     var exposures: [CGFloat] {
-        let count = 7
+        let count = 12
         return (0..<count).map({ i -> CGFloat in
             let fraction = CGFloat(i) / CGFloat(count - 1)
-            return pow(fraction, 3) * 0.7 + 0.05
+            return pow(fraction, 3.0) * 0.75
         })
     }
     struct FreezeExposure {
@@ -27,15 +27,19 @@ class ViewController: UIViewController {
     }
     var freezeExposures: [FreezeExposure] = []
     
+    var comboView: UIView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Pixels.main.bits = ._16
+        
         camera = CameraPIX()
         camera.manualExposure = true
-        
+        camera.manualFocus = true
+
         final = camera
         final.view.frame = view.bounds
-//        final.view.placement = .aspectFill
         final.view.liveTouch(active: false)
         view.addSubview(final.view)
         
@@ -44,10 +48,9 @@ class ViewController: UIViewController {
             freeze.inPix = camera
             let count = CGFloat(exposures.count)
             let x = (view.bounds.width / count) * CGFloat(i)
-            let y = CGFloat(0.0) //view.bounds.height - ((view.bounds.width / count) * (16 / 9))
             let width = view.bounds.width / count
-            let height = (view.bounds.width / count) * (16 / 9)
-            freeze.view.frame = CGRect(x: x, y: y, width: width, height: height)
+            let height = (view.bounds.width / count) / (16 / 9)
+            freeze.view.frame = CGRect(x: x, y: 0.0, width: width, height: height)
             view.addSubview(freeze.view)
             let freezeExposure = FreezeExposure(exposure: exposure, freeze: freeze)
             freezeExposures.append(freezeExposure)
@@ -57,14 +60,26 @@ class ViewController: UIViewController {
         
     }
     
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let u = touches.first!.location(in: view).x / view.bounds.width
+        camera.focus = u
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        comboView?.removeFromSuperview()
+//        for freezeExposure in freezeExposures {
+//            freezeExposure.freeze.freeze = false
+//        }
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for freezeExposure in freezeExposures {
-            freezeExposure.freeze.freeze = false
-        }
         var index = 0
         func cap() {
             guard index < exposures.count else {
                 expose(at: 0.1)
+                wait(for: 0.5) {
+                    self.combine()
+                }
                 return
             }
             self.capture(exposure: exposures[index]) {
@@ -100,13 +115,16 @@ class ViewController: UIViewController {
         var allBlend: PIX & PIXOut = bgColor
         for freezeExposure in freezeExposures {
             let blend = BlendPIX()
-            blend.blendingMode = .add
+            blend.mode = .add
             blend.inPixA = allBlend
-            blend.inPixB = freezeExposure.freeze
+            blend.inPixB = freezeExposure.freeze * LiveFloat(0.5 + 1.0 - freezeExposure.exposure)
             allBlend = blend
         }
-        allBlend.view.frame = view.bounds
-        view.addSubview(allBlend.view)
+        let allFinal = allBlend * LiveFloat(1.0 / CGFloat(freezeExposures.count)) * 0.15
+        allFinal.view.frame = view.bounds
+        allFinal.view.liveTouch(active: false)
+        view.addSubview(allFinal.view)
+        comboView = allFinal.view
     }
     
     func wait(for seconds: Double, done: @escaping () -> ()) {
