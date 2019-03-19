@@ -15,10 +15,10 @@ class ViewController: UIViewController {
     var final: PIX!
     
     var exposures: [CGFloat] {
-        let count = 12
+        let count = 5
         return (0..<count).map({ i -> CGFloat in
             let fraction = CGFloat(i) / CGFloat(count - 1)
-            return pow(fraction, 5.0) * 0.75
+            return pow(fraction, 3.0) * 0.7 + 0.01
         })
     }
     struct FreezeExposure {
@@ -28,9 +28,9 @@ class ViewController: UIViewController {
     var freezeExposures: [FreezeExposure] = []
     
     var combo = false
-    var comboLevels: LevelsPIX?
-    var comboView: UIView?
-    var captureButton: UIButton!
+    var comboLevels: LevelsPIX!
+    
+    var button: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +38,7 @@ class ViewController: UIViewController {
         Pixels.main.bits = ._16
         
         camera = CameraPIX()
+        camera.camRes = ._1080p
         camera.manualExposure = true
         camera.manualFocus = true
 
@@ -46,48 +47,75 @@ class ViewController: UIViewController {
         final.view.liveTouch(active: false)
         view.addSubview(final.view)
         
+        let bgColor = ColorPIX(res: ._1080p)
+        bgColor.color = .black
+        
+        var allBlend: PIX & PIXOut = bgColor
         for (i, exposure) in exposures.enumerated() {
+            
             let freeze = FreezePIX()
             freeze.inPix = camera
+            
+            let blend = BlendPIX()
+            blend.mode = .add
+            blend.inPixA = allBlend
+            blend.inPixB = freeze * LiveFloat(0.5 + (1.0 - exposure))
+            allBlend = blend
+            
             let count = CGFloat(exposures.count)
+            let w = view.bounds.width / count
+            let h = (view.bounds.width / count) / (16 / 9)
             let x = (view.bounds.width / count) * CGFloat(i)
-            let width = view.bounds.width / count
-            let height = (view.bounds.width / count) / (16 / 9)
-            freeze.view.frame = CGRect(x: x, y: 30.0, width: width, height: height)
+            let y = CGFloat(30.0)
+            freeze.view.frame = CGRect(x: x, y: y, width: w, height: h)
+            freeze.view.alpha = 0.0
             view.addSubview(freeze.view)
+            
             let freezeExposure = FreezeExposure(exposure: exposure, freeze: freeze)
             freezeExposures.append(freezeExposure)
+            
         }
+        
+        let allFinal = allBlend * LiveFloat(1.0 / CGFloat(freezeExposures.count))
+        comboLevels = LevelsPIX()
+        comboLevels.inPix = allFinal
+        comboLevels.view.frame = view.bounds
+        comboLevels.view.liveTouch(active: false)
+        comboLevels.view.backgroundColor = .black
+        comboLevels.brightness = 0.5
+        comboLevels.gamma = 0.5
+        view.addSubview(comboLevels!.view)
+        comboLevels!.view.isHidden = true
         
         expose(at: 0.1)
         
-        captureButton = UIButton(type: .system)
-        captureButton.setTitle("Capture HDR Exposure Stack", for: .normal)
-        captureButton.addTarget(self, action: #selector(captureHDR), for: .touchUpInside)
-        view.addSubview(captureButton)
+        button = UIButton(type: .system)
+        button.setTitle("Capture HDR Exposure Stack", for: .normal)
+        button.addTarget(self, action: #selector(captureHDR), for: .touchUpInside)
+        view.addSubview(button)
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        captureButton.translatesAutoresizingMaskIntoConstraints = false
-        captureButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        captureButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         let u = touches.first!.location(in: view).x / view.bounds.width
         let v = touches.first!.location(in: view).y / view.bounds.height
         if combo {
-            comboLevels?.brightness = LiveFloat((1.0 - v) * 4)
-            comboLevels?.gamma = LiveFloat(u * 2)
+            comboLevels?.brightness = LiveFloat(1.0 - v)
+            comboLevels?.gamma = LiveFloat(u)
         } else {
             camera.focus = u
-            expose(at: pow(1.0 - v, 5.0) * 0.75)
+            expose(at: pow(1.0 - v, 3.0) * 0.7 + 0.01)
         }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        comboView?.removeFromSuperview()
+//        comboLevels.view.removeFromSuperview()
 //        for freezeExposure in freezeExposures {
 //            freezeExposure.freeze.freeze = false
 //        }
@@ -110,6 +138,8 @@ class ViewController: UIViewController {
             }
         }
         cap()
+        button.isEnabled = false
+        button.setTitle("Capture in progress", for: .normal)
     }
     
     func capture(exposure: CGFloat, done: @escaping () -> ()) {
@@ -118,6 +148,7 @@ class ViewController: UIViewController {
             for freezeExposure in self.freezeExposures {
                 if freezeExposure.exposure == exposure {
                     freezeExposure.freeze.freeze = true
+                    freezeExposure.freeze.view.alpha = 1.0
                 }
             }
             self.wait(for: 0.25, done: {
@@ -133,28 +164,17 @@ class ViewController: UIViewController {
     
     func combine() {
         combo = true
-        let bgColor = ColorPIX(res: .fullscreen)
-        bgColor.color = .black
-        var allBlend: PIX & PIXOut = bgColor
-        for freezeExposure in freezeExposures {
-            let blend = BlendPIX()
-            blend.mode = .add
-            blend.inPixA = allBlend
-            blend.inPixB = freezeExposure.freeze * LiveFloat(0.5 + 1.0 - freezeExposure.exposure)
-            allBlend = blend
-        }
-        let allFinal = allBlend * LiveFloat(1.0 / CGFloat(freezeExposures.count)) * 0.1
-        comboLevels = LevelsPIX()
-        comboLevels!.inPix = allFinal
-        comboLevels!.view.frame = view.bounds
-        comboLevels!.view.liveTouch(active: false)
-        view.insertSubview(comboLevels!.view, at: view.subviews.count - 2)
-        comboView = comboLevels!.view
-        captureButton.setTitle("Save HDR Exposure Stack", for: .normal)
+        comboLevels!.view.isHidden = false
+        button.setTitle("Save HDR Exposure Stack", for: .normal)
+        button.isEnabled = true
     }
     
     func save(pix: PIX) {
-        guard let image = pix.renderedImage else { return }
+        guard let image = pix.renderedImage else {
+            let alert = UIAlertController(title: "Texture Not Found", message: nil, preferredStyle: .alert)
+            present(alert, animated: true, completion: nil)
+            return
+        }
         let activityViewController = UIActivityViewController(activityItems: [image] , applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         present(activityViewController, animated: true, completion: nil)

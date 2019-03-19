@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3AF80CAC224107A30052C53A /* Pixels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF80CA92241079A0052C53A /* Pixels.framework */; };
-		3AF80CAD224107A30052C53A /* Pixels.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF80CA92241079A0052C53A /* Pixels.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3AF80CB1224107B70052C53A /* PixelsShaders.metallib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF80CB0224107B70052C53A /* PixelsShaders.metallib */; };
-		3AF80CB2224107BD0052C53A /* PixelsShaders.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 3AF80CB0224107B70052C53A /* PixelsShaders.metallib */; };
+		741E90592241263D00594374 /* Pixels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 741E90562241263500594374 /* Pixels.framework */; };
+		741E905A2241263D00594374 /* Pixels.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 741E90562241263500594374 /* Pixels.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		741E905E2241264E00594374 /* PixelsShaders.metallib in Frameworks */ = {isa = PBXBuildFile; fileRef = 741E905D2241264E00594374 /* PixelsShaders.metallib */; };
+		741E905F2241264F00594374 /* PixelsShaders.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 741E905D2241264E00594374 /* PixelsShaders.metallib */; };
 		74DE724B223FDFC2005B43F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE724A223FDFC2005B43F1 /* AppDelegate.swift */; };
 		74DE724D223FDFC2005B43F1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE724C223FDFC2005B43F1 /* ViewController.swift */; };
 		74DE7250223FDFC2005B43F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74DE724E223FDFC2005B43F1 /* Main.storyboard */; };
@@ -20,23 +20,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3AF80CA82241079A0052C53A /* PBXContainerItemProxy */ = {
+		741E90552241263500594374 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3AF80CA22241079A0052C53A /* Pixels.xcodeproj */;
+			containerPortal = 741E904F2241263400594374 /* Pixels.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 74BC39D721011E3A004E9AA0;
 			remoteInfo = Pixels;
 		};
-		3AF80CAA2241079A0052C53A /* PBXContainerItemProxy */ = {
+		741E90572241263500594374 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3AF80CA22241079A0052C53A /* Pixels.xcodeproj */;
+			containerPortal = 741E904F2241263400594374 /* Pixels.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 3AF28BCC219312900079FC7A;
 			remoteInfo = "Pixels-macOS";
 		};
-		3AF80CAE224107A30052C53A /* PBXContainerItemProxy */ = {
+		741E905B2241263D00594374 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3AF80CA22241079A0052C53A /* Pixels.xcodeproj */;
+			containerPortal = 741E904F2241263400594374 /* Pixels.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 74BC39D621011E3A004E9AA0;
 			remoteInfo = Pixels;
@@ -50,7 +50,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3AF80CAD224107A30052C53A /* Pixels.framework in Embed Frameworks */,
+				741E905A2241263D00594374 /* Pixels.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,8 +58,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3AF80CA22241079A0052C53A /* Pixels.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pixels.xcodeproj; path = "../../Google Drive/M00/Frameworks/pixels/Pixels.xcodeproj"; sourceTree = "<group>"; };
-		3AF80CB0224107B70052C53A /* PixelsShaders.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; path = PixelsShaders.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
+		741E904F2241263400594374 /* Pixels.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pixels.xcodeproj; path = ../../pixels/Pixels.xcodeproj; sourceTree = "<group>"; };
+		741E905D2241264E00594374 /* PixelsShaders.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; path = PixelsShaders.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 		74DE7247223FDFC2005B43F1 /* Pixels HDR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pixels HDR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74DE724A223FDFC2005B43F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74DE724C223FDFC2005B43F1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -68,7 +68,6 @@
 		74DE7254223FDFC4005B43F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74DE7257223FDFC4005B43F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74DE7259223FDFC4005B43F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		74DE726F223FE00A005B43F1 /* PixelsShaders.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; path = PixelsShaders.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,19 +75,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AF80CB1224107B70052C53A /* PixelsShaders.metallib in Frameworks */,
-				3AF80CAC224107A30052C53A /* Pixels.framework in Frameworks */,
+				741E90592241263D00594374 /* Pixels.framework in Frameworks */,
+				741E905E2241264E00594374 /* PixelsShaders.metallib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3AF80CA32241079A0052C53A /* Products */ = {
+		741E90502241263400594374 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3AF80CA92241079A0052C53A /* Pixels.framework */,
-				3AF80CAB2241079A0052C53A /* Pixels_macOS.framework */,
+				741E90562241263500594374 /* Pixels.framework */,
+				741E90582241263500594374 /* Pixels_macOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,7 +99,7 @@
 				74DE7272223FE01F005B43F1 /* Resources */,
 				74DE7248223FDFC2005B43F1 /* Products */,
 				74DE726E223FE00A005B43F1 /* Frameworks */,
-				3AF80CA22241079A0052C53A /* Pixels.xcodeproj */,
+				741E904F2241263400594374 /* Pixels.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -124,8 +123,7 @@
 		74DE726E223FE00A005B43F1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3AF80CB0224107B70052C53A /* PixelsShaders.metallib */,
-				74DE726F223FE00A005B43F1 /* PixelsShaders.metallib */,
+				741E905D2241264E00594374 /* PixelsShaders.metallib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -157,7 +155,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				3AF80CAF224107A30052C53A /* PBXTargetDependency */,
+				741E905C2241263D00594374 /* PBXTargetDependency */,
 			);
 			name = "Pixels HDR";
 			productName = "Pixels HDR";
@@ -192,8 +190,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 3AF80CA32241079A0052C53A /* Products */;
-					ProjectRef = 3AF80CA22241079A0052C53A /* Pixels.xcodeproj */;
+					ProductGroup = 741E90502241263400594374 /* Products */;
+					ProjectRef = 741E904F2241263400594374 /* Pixels.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -204,18 +202,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3AF80CA92241079A0052C53A /* Pixels.framework */ = {
+		741E90562241263500594374 /* Pixels.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Pixels.framework;
-			remoteRef = 3AF80CA82241079A0052C53A /* PBXContainerItemProxy */;
+			remoteRef = 741E90552241263500594374 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3AF80CAB2241079A0052C53A /* Pixels_macOS.framework */ = {
+		741E90582241263500594374 /* Pixels_macOS.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Pixels_macOS.framework;
-			remoteRef = 3AF80CAA2241079A0052C53A /* PBXContainerItemProxy */;
+			remoteRef = 741E90572241263500594374 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -225,8 +223,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				741E905F2241264F00594374 /* PixelsShaders.metallib in Resources */,
 				74DE7258223FDFC4005B43F1 /* LaunchScreen.storyboard in Resources */,
-				3AF80CB2224107BD0052C53A /* PixelsShaders.metallib in Resources */,
 				74DE7255223FDFC4005B43F1 /* Assets.xcassets in Resources */,
 				74DE7250223FDFC2005B43F1 /* Main.storyboard in Resources */,
 			);
@@ -248,10 +246,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3AF80CAF224107A30052C53A /* PBXTargetDependency */ = {
+		741E905C2241263D00594374 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Pixels;
-			targetProxy = 3AF80CAE224107A30052C53A /* PBXContainerItemProxy */;
+			targetProxy = 741E905B2241263D00594374 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
