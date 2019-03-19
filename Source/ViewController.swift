@@ -91,7 +91,7 @@ class ViewController: UIViewController {
         
         button = UIButton(type: .system)
         button.setTitle("Capture HDR Exposure Stack", for: .normal)
-        button.addTarget(self, action: #selector(captureHDR), for: .touchUpInside)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         view.addSubview(button)
         
     }
@@ -114,15 +114,17 @@ class ViewController: UIViewController {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        comboLevels.view.removeFromSuperview()
-//        for freezeExposure in freezeExposures {
-//            freezeExposure.freeze.freeze = false
-//        }
-    }
-    
-    @objc func captureHDR() {
-        guard !combo else { save(pix: comboLevels!); return }
+    @objc func buttonAction() {
+        guard !combo else {
+            for freezeExposure in freezeExposures {
+                freezeExposure.freeze.freeze = false
+                freezeExposure.freeze.view.alpha = 0.0
+            }
+            button.setTitle("Capture HDR Exposure Stack", for: .normal)
+            comboLevels!.view.isHidden = true
+            combo = false
+            return
+        }
         var index = 0
         func cap() {
             guard index < exposures.count else {
@@ -139,7 +141,7 @@ class ViewController: UIViewController {
         }
         cap()
         button.isEnabled = false
-        button.setTitle("Capture in progress", for: .normal)
+        button.setTitle("Capture in progress...", for: .normal)
     }
     
     func capture(exposure: CGFloat, done: @escaping () -> ()) {
@@ -165,20 +167,21 @@ class ViewController: UIViewController {
     func combine() {
         combo = true
         comboLevels!.view.isHidden = false
-        button.setTitle("Save HDR Exposure Stack", for: .normal)
+        button.setTitle("Reset HDR Exposure Stack", for: .normal)
         button.isEnabled = true
     }
     
-    func save(pix: PIX) {
-        guard let image = pix.renderedImage else {
-            let alert = UIAlertController(title: "Texture Not Found", message: nil, preferredStyle: .alert)
-            present(alert, animated: true, completion: nil)
-            return
-        }
-        let activityViewController = UIActivityViewController(activityItems: [image] , applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-        present(activityViewController, animated: true, completion: nil)
-    }
+//    func save() {
+//        guard let image = comboLevels.renderedImage else {
+//            let alert = UIAlertController(title: "Texture Not Found", message: nil, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//            present(alert, animated: true, completion: nil)
+//            return
+//        }
+//        let activityViewController = UIActivityViewController(activityItems: [image] , applicationActivities: nil)
+//        activityViewController.popoverPresentationController?.sourceView = self.view
+//        present(activityViewController, animated: true, completion: nil)
+//    }
     
     func wait(for seconds: Double, done: @escaping () -> ()) {
         RunLoop.current.add(Timer(timeInterval: seconds, repeats: false, block: { _ in
