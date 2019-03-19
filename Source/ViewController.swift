@@ -15,11 +15,14 @@ class ViewController: UIViewController {
     var final: PIX!
     
     var exposures: [CGFloat] {
-        let count = 5
+        let count = 7
         return (0..<count).map({ i -> CGFloat in
             let fraction = CGFloat(i) / CGFloat(count - 1)
-            return pow(fraction, 3.0) * 0.7 + 0.01
+            return expo(fraction)
         })
+    }
+    func expo(_ val: CGFloat) -> CGFloat {
+        return pow(val, 10.0) * 0.2
     }
     struct FreezeExposure {
         let exposure: CGFloat
@@ -110,7 +113,7 @@ class ViewController: UIViewController {
             comboLevels?.gamma = LiveFloat(u)
         } else {
             camera.focus = u
-            expose(at: pow(1.0 - v, 3.0) * 0.7 + 0.01)
+            expose(at: expo(1.0 - v))
         }
     }
     
